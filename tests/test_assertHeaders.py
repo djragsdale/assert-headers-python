@@ -105,9 +105,9 @@ class AssertHeadersTest(unittest.TestCase):
         try:
             assertHeaders(headers, schema)
             self.assertTrue(False) # Should not get reached
-        except HeaderAssertionError as errs:
-            self.assertEqual(len(errs.errors), 4)
-            for err in errs:
-                self.assertTrue(hasattr(err, "type"))
-                self.assertTrue(hasattr(err, "headerName"))
-                self.assertTrue(hasattr(err, "message"))
+        except HeaderAssertionError as headerAssertionError:
+            self.assertEqual(len(headerAssertionError.errors), 4)
+            for err in headerAssertionError.errors:
+                self.assertTrue("type" in err)
+                self.assertTrue("headerName" in err)
+                self.assertTrue("message" in err)
