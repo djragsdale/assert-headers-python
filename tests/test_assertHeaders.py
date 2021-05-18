@@ -11,8 +11,7 @@ Tests for `AssertHeaders` module.
 import pytest
 import unittest
 
-from AssertHeaders.assertHeaders import assertHeaders
-from AssertHeaders.HeaderAssertionError import HeaderAssertionError
+from AssertHeaders import assertHeaders, HeaderAssertionError
 
 baseSchema = {
     "cache-control": False,
