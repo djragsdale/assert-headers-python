@@ -1,5 +1,5 @@
 from enum import Enum
-from AssertHeaders.HeaderAssertionError import HeaderAssertionError
+from AssertHeaders import HeaderAssertionError
 
 class ErrorTypes(Enum):
     FoundDisallowed = "found disallowed"
@@ -12,10 +12,6 @@ def assertHeaders(headers, schema):
 
     for schemaHeader in schema:
         schemaValue = schema[schemaHeader]
-        print('testing')
-        print(schemaHeader)
-        print(schemaValue)
-        print(headers)
         # schemaValue is False
         if not schemaValue:
             if schemaHeader in headers:

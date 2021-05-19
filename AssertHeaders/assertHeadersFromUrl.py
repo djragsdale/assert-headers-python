@@ -1,20 +1,13 @@
-import os
 import requests
 
-from AssertHeaders import assertHeaders
+from AssertHeaders import assertHeaders, getMeta
 
 def assertHeadersFromUrl(url, configuration):
-    currentDir = os.path.realpath(os.path.join(os.path.dirname(__file__)))
-
-    about = {}
-    with open(os.path.join(currentDir, "__about__.py")) as f:
-        exec (f.read(), about)
-
-    currentVersion = about["__version__"]
+    meta = getMeta()
 
     config = {
       "origin": "http://a.com",
-      "userAgent": f'Assert Headers v{currentVersion} (https://github.com/djragsdale/assert-headers-python)',
+      "userAgent": f'Assert Headers v{meta["__version__"]} ({meta["__uri__"]})',
       **configuration
     }
 
