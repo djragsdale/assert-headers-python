@@ -9,5 +9,8 @@ from AssertHeaders.getMeta import getMeta
 from AssertHeaders.assertHeaders import assertHeaders
 from AssertHeaders.assertHeadersFromUrl import assertHeadersFromUrl
 
-# if __name__ == '__main__':
-    # TODO: Call cli.py
+# CLI Scripts
+from AssertHeaders.cli import cli
+
+if __name__ == '__main__':
+    cli()
