@@ -12,6 +12,10 @@ def assertHeaders(headers, schema):
 
     for schemaHeader in schema:
         schemaValue = schema[schemaHeader]
+        print('testing')
+        print(schemaHeader)
+        print(schemaValue)
+        print(headers)
         # schemaValue is False
         if not schemaValue:
             if schemaHeader in headers:
@@ -31,7 +35,10 @@ def assertHeaders(headers, schema):
                 })
         # schemaValue is str
         elif isinstance(schemaValue, str):
-            if (headers[schemaHeader] != schemaValue):
+            try:
+                # Raises exception if key doesn't exist or if value is wrong
+                assert(headers[schemaHeader] == schemaValue)
+            except:
                 errors.append({
                   "type": ErrorTypes.InvalidValue,
                   "headerName": schemaHeader,
@@ -47,14 +54,17 @@ def assertHeaders(headers, schema):
             }
             # if any are True, the header value must match a True schema value
             # if none are True, the header must NOT match a False schema value
-            if True in schemaValue.values():
-                allowedValues = filter(lambda val: schemaValue[val] == True, [val for val in schemaValue])
-                if headers[schemaHeader] not in allowedValues:
-                    errors.append(errorDict)
-            else:
-                disallowedValues = [val for val in schemaValue]
-                if headers[schemaHeader] in disallowedValues:
-                    errors.append(errorDict)
+            try:
+                if True in schemaValue.values():
+                    allowedValues = filter(lambda val: schemaValue[val] == True, [val for val in schemaValue])
+                    if headers[schemaHeader] not in allowedValues:
+                        errors.append(errorDict)
+                else:
+                    disallowedValues = [val for val in schemaValue]
+                    if headers[schemaHeader] in disallowedValues:
+                        errors.append(errorDict)
+            except:
+                  errors.append(errorDict)
         else:
             errors.append({
                 "type": ErrorTypes.SchemaError,
