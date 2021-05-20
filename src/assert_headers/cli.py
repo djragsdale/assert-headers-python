@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import sys
 
 from enum import Enum
@@ -58,7 +59,8 @@ def cli():
 
     config = {}
     try:
-        config = getConfiguration(args.config)
+        configurationPath = os.path.join(os.getcwd(), args.config)
+        config = getConfiguration(configurationPath)
     except BaseException as err:
         if not args.silent:
             print(err["message"])
@@ -67,7 +69,6 @@ def cli():
 
     headers = {}
     try:
-      # TODO: Resolve this config as a relative path
       headers = assertHeadersFromUrl(args.url, config)
 
     except HeaderAssertionError as headerAssertionError:
