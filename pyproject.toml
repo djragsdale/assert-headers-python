@@ -1,9 +1,14 @@
 [tool.poetry]
-name = "assert-headers-py"
-version = "0.1.0"
+name = "assert_headers"
+version = "0.1.8"
 description = "Assert HTTP headers."
 authors = ["David Ragsdale <pkgsupport@davidjragsdale.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/djragsdale/assert-headers-python"
+repository = "https://github.com/djragsdale/assert-headers-python"
+keywords = ["http", "https", "headers", "assert"]
+include = ["LICENSE"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
@@ -11,6 +16,9 @@ requests = "^2.25.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
+
+[tool.poetry.scripts]
+assert-headers-py = "assert_headers.cli:cli"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

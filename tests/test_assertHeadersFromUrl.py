@@ -12,7 +12,7 @@ import pytest
 from mock import patch
 import unittest
 
-from AssertHeaders import assertHeadersFromUrl, HeaderAssertionError
+from assert_headers import assertHeadersFromUrl, HeaderAssertionError
 
 class AssertHeadersTest(unittest.TestCase):
   def test_raises_if_request_fails_header_assertion(self):

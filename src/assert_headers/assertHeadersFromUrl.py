@@ -1,6 +1,6 @@
 import requests
 
-from AssertHeaders import assertHeaders, getMeta
+from assert_headers import assertHeaders, getMeta
 
 def assertHeadersFromUrl(url, configuration):
     meta = getMeta()

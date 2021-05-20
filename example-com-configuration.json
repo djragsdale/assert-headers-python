@@ -1,0 +1,7 @@
+{
+  "userAgent": "assert-headers-py",
+  "origin": "https://example.com",
+  "schema": {
+    "cache-control": true
+  }
+}

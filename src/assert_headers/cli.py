@@ -3,7 +3,7 @@ import json
 import sys
 
 from enum import Enum
-from AssertHeaders import assertHeadersFromUrl, getMeta, HeaderAssertionError
+from assert_headers import assertHeadersFromUrl, getMeta, HeaderAssertionError
 
 def getConfiguration(configurationPath):
     configuration = {}
@@ -67,6 +67,7 @@ def cli():
 
     headers = {}
     try:
+      # TODO: Resolve this config as a relative path
       headers = assertHeadersFromUrl(args.url, config)
 
     except HeaderAssertionError as headerAssertionError:
@@ -86,3 +87,6 @@ def cli():
         print(headers)
 
     sys.exit(ExitCodes.Success.value)
+
+if __name__ == "__main__":
+    cli()

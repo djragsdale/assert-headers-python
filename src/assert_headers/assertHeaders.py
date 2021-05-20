@@ -1,5 +1,5 @@
 from enum import Enum
-from AssertHeaders import HeaderAssertionError
+from assert_headers import HeaderAssertionError
 
 class ErrorTypes(Enum):
     FoundDisallowed = "found disallowed"
