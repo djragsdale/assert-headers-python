@@ -31,12 +31,6 @@ def cli():
         description = meta["__summary__"]
     )
 
-    # parser.add_argument("--version",
-    #                     action="store",
-    #                     help="Just print the version",
-    #                     type=bool,
-    #                     default=False)
-
     parser.add_argument("--config",
                         action="store",
                         help="Relative path to configuration file",
