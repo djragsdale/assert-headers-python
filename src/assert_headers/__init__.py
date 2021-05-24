@@ -11,6 +11,3 @@ from .assertHeadersFromUrl import assertHeadersFromUrl
 
 # CLI Scripts
 from .cli import cli
-
-# if __name__ == '__main__':
-#     cli()

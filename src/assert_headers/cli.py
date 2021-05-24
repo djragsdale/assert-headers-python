@@ -1,17 +1,10 @@
 import argparse
-import json
 import os
 import sys
 
 from enum import Enum
 from assert_headers import assertHeadersFromUrl, getMeta, HeaderAssertionError
-
-def getConfiguration(configurationPath):
-    configuration = {}
-    with open(configurationPath, "r") as f:
-        configurationStr = f.read()
-        configuration = json.loads(configurationStr)
-        return configuration
+from .getCLIConfiguration import getCLIConfiguration
 
 class ExitCodes(Enum):
     AssertionFailed = 2
@@ -54,10 +47,10 @@ def cli():
     config = {}
     try:
         configurationPath = os.path.join(os.getcwd(), args.config)
-        config = getConfiguration(configurationPath)
+        config = getCLIConfiguration(configurationPath)
     except BaseException as err:
         if not args.silent:
-            print(err["message"])
+            print(err)
         
         sys.exit(ExitCodes.ConfigurationError.value)
 
@@ -67,13 +60,13 @@ def cli():
 
     except HeaderAssertionError as headerAssertionError:
         if not args.silent:
-            print(headerAssertionError["message"])
+            print(headerAssertionError)
         
         sys.exit(ExitCodes.AssertionFailed.value)
 
     except BaseException as err:
         if not args.silent:
-            print(err["message"])
+            print(err)
         
         sys.exit(ExitCodes.UncaughtError.value)
 

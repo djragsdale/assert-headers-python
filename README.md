@@ -40,7 +40,7 @@ TODO: Show how the exit codes can be used in smoke tests
 
 #### CLI Configuration
 
-`assert-headers-py` currently accepts configuration in JSON format. It allows specifying a schema for the headers, but also the outgoing origin and user-agent headers for the request. Below is an example configuration:
+`assert-headers-py` currently accepts configuration in JSON or YAML formats. It allows specifying a schema for the headers, but also the outgoing origin and user-agent headers for the request. Below is an example configuration:
 
 ```json
 {
@@ -58,11 +58,21 @@ TODO: Show how the exit codes can be used in smoke tests
 }
 ```
 
-TODO: Allow yml configuration
+```yaml
+userAgent: "assert-headers-py"
+origin: "https://example.com"
+schema:
+  cache-control: False
+  strict-transport-security: True
+  x-content-type-options: "nosniff"
+  x-frame-options:
+    DENY: True
+    SAMEORIGIN: False
+```
 
 **Schema Explanation:**
 
-> Note: Since the preferred format of the schema is JSON, the values will use `false` instead of `False` and `true` instead of `True`.
+> Note: Since the example format of the schema is JSON, the values will use `false` instead of `False` and `true` instead of `True`.
 
 1. `"disallowed-header-name": false` - It is considered an error if this header is defined
 1. `"required-header-name": true` - It is considered an error if this header is missing (or `undefined`)

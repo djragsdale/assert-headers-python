@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "assert_headers"
-version = "0.1.9"
+version = "1.0.0"
 description = "Assert HTTP headers."
 authors = ["David Ragsdale <pkgsupport@davidjragsdale.com>"]
 license = "MIT"
@@ -13,6 +13,7 @@ include = ["LICENSE"]
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.25.1"
+PyYAML = "^5.4.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"

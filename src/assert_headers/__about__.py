@@ -12,7 +12,7 @@ __title__ = "AssertHeaders"
 __summary__ = ("Assert HTTP headers.")
 __uri__ = "https://github.com/djragsdale/assert-headers-python"
 
-__version__ = "0.1.9"
+__version__ = "1.0.0"
 
 __author__ = "David Ragsdale"
 __email__ = "pkgsupport@davidjragsdale.com"
