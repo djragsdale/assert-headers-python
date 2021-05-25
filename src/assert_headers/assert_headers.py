@@ -2,12 +2,12 @@ from enum import Enum
 from assert_headers import HeaderAssertionError
 
 class ErrorTypes(Enum):
-    FoundDisallowed = "found disallowed"
-    InvalidValue = "has invalid value for"
-    MissingRequired = "missing required"
-    SchemaError = "invalid schema"
+    FOUND_DISALLOWED = "found disallowed"
+    INVALID_VALUE = "has invalid value for"
+    MISSING_REQUIRED = "missing required"
+    SCHEMA_ERROR = "invalid schema"
 
-def assertHeaders(headers, schema):
+def assert_headers(headers, schema):
     errors = []
 
     for schemaHeader in schema:
@@ -16,7 +16,7 @@ def assertHeaders(headers, schema):
         if not schemaValue:
             if schemaHeader in headers:
                 errors.append({
-                    "type": ErrorTypes.FoundDisallowed,
+                    "type": ErrorTypes.FOUND_DISALLOWED,
                     "headerName": schemaHeader,
                     "headerValue": headers[schemaHeader],
                     "message": f'"{schemaHeader}" is disallowed but was found'
@@ -25,7 +25,7 @@ def assertHeaders(headers, schema):
         elif schemaValue == True:
             if schemaHeader not in headers:
                 errors.append({
-                  "type": ErrorTypes.MissingRequired,
+                  "type": ErrorTypes.MISSING_REQUIRED,
                   "headerName": schemaHeader,
                   "message": f'"{schemaHeader}" is required but was missing'
                 })
@@ -36,14 +36,14 @@ def assertHeaders(headers, schema):
                 assert(headers[schemaHeader] == schemaValue)
             except:
                 errors.append({
-                  "type": ErrorTypes.InvalidValue,
+                  "type": ErrorTypes.INVALID_VALUE,
                   "headerName": schemaHeader,
                   "message": f'"{schemaHeader}" expected value "{schemaValue}"'
                 })
         # schemaValue is dict
         elif isinstance(schemaValue, dict):
             errorDict = {
-                "type": ErrorTypes.InvalidValue,
+                "type": ErrorTypes.INVALID_VALUE,
                 "headerName": schemaHeader,
                 "headerValue": headers[schemaHeader],
                 "message": f'"{headers[schemaHeader]}" is not an allowed value for "{schemaHeader}"'
@@ -63,7 +63,7 @@ def assertHeaders(headers, schema):
                   errors.append(errorDict)
         else:
             errors.append({
-                "type": ErrorTypes.SchemaError,
+                "type": ErrorTypes.SCHEMA_ERROR,
                 "headerName": schemaHeader,
                 "message": f'the schema for "{schemaHeader}" is invalid'
             })

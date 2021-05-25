@@ -1,6 +1,6 @@
 import os
 
-def getMeta():
+def get_meta():
     moduleDir = os.path.realpath(os.path.join(os.path.dirname(__file__)))
 
     about = {}

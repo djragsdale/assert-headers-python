@@ -5,9 +5,9 @@
 from .HeaderAssertionError import HeaderAssertionError
 
 # Functions in order they depend on each other
-from .getMeta import getMeta
-from .assertHeaders import assertHeaders
-from .assertHeadersFromUrl import assertHeadersFromUrl
+from .getMeta import get_meta
+from .assert_headers import assert_headers
+from .assert_headers_from_url import assert_headers_from_url
 
 # CLI Scripts
 from .cli import cli

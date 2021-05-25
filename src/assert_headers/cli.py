@@ -4,20 +4,20 @@ import sys
 
 from enum import Enum
 from assert_headers import assertHeadersFromUrl, getMeta, HeaderAssertionError
-from .getCLIConfiguration import getCLIConfiguration
+from .get_cli_configuration import get_cli_configuration
 
 class ExitCodes(Enum):
-    AssertionFailed = 2
-    ConfigurationError = 3
-    Success = 0
-    UncaughtError = 1
+    ASSERTION_FAILED = 2
+    CONFIGURATION_ERROR = 3
+    SUCCESS = 0
+    UNCAUGHT_ERROR = 1
 
 def cli():
     meta = getMeta()
 
     if "--version" in sys.argv:
         print(f'assert-headers-py v{meta["__version__"]}')
-        sys.exit(ExitCodes.Success.value)
+        sys.exit(ExitCodes.SUCCESS.value)
 
     parser = argparse.ArgumentParser(
         prog = meta["__title__"],
@@ -46,35 +46,35 @@ def cli():
 
     config = {}
     try:
-        configurationPath = os.path.join(os.getcwd(), args.config)
-        config = getCLIConfiguration(configurationPath)
+        configuration_path = os.path.join(os.getcwd(), args.config)
+        config = get_cli_configuration(configuration_path)
     except BaseException as err:
         if not args.silent:
             print(err)
-        
-        sys.exit(ExitCodes.ConfigurationError.value)
+
+        sys.exit(ExitCodes.CONFIGURATION_ERROR.value)
 
     headers = {}
     try:
-      headers = assertHeadersFromUrl(args.url, config)
+        headers = assertHeadersFromUrl(args.url, config)
 
     except HeaderAssertionError as headerAssertionError:
         if not args.silent:
             print(headerAssertionError)
-        
-        sys.exit(ExitCodes.AssertionFailed.value)
+
+        sys.exit(ExitCodes.ASSERTION_FAILED.value)
 
     except BaseException as err:
         if not args.silent:
             print(err)
-        
-        sys.exit(ExitCodes.UncaughtError.value)
+
+        sys.exit(ExitCodes.UNCAUGHT_ERROR.value)
 
     if not args.silent:
         print("assert-headers success\n")
         print(headers)
 
-    sys.exit(ExitCodes.Success.value)
+    sys.exit(ExitCodes.SUCCESS.value)
 
 if __name__ == "__main__":
     cli()
